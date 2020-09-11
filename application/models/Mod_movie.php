@@ -18,9 +18,10 @@ class Mod_movie extends CI_Model {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function get_movie()
+	public function get_movie($name)
 	{
-		$query = $this->db->query('call search_movie()');
+		$query = $this->db->query("call search_movie('" . $name . "')");
 		return $query->result();
+		
 	}
 }

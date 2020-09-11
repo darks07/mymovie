@@ -56,7 +56,20 @@
 							</button>
 						</div>
 					</div>
-				</div>
+                </div>
+                
+                <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li v-for="movie in listMovies" class="list-group-item" :key="movie.index">
+                        <h5>title</h5>
+                        <h5>year</h5>
+                    </li>
+                    <!-- <li class="list-group-item">Cras justo odio</li> -->
+                </ul>
+                </div>
+                </div>
+
 			</div>
 		</div>
 
@@ -79,16 +92,19 @@
 		<script>
 			new Vue({
 				el: "#app",
-				data: {},
+				data: {
+                    listMovies: [],
+                },
 				methods: {
 					async searchMovie() {
 						console.log("click!");
 						await fetch("http://localhost/mymovie")
 							.then((response) => response.json())
-							.then((data) => {
-								console.log(data);
-							});
+							.then(this.addToListMovie);
 					},
+                    addToListMovie(dataFetch) {
+                        this.listMovies = dataFetch;
+                    }
 				},
 			});
 		</script>

@@ -19,6 +19,7 @@ class Home extends CI_Controller
 
     public function detail_movie($movie_id = '')
     {
+        // @todo: tambah fitur detail
         header('Content-Type: application/json');
         $this->load->model('Mod_movie');
         $getDetailMovie = $this->Mod_movie->detail_movie($movie_id);

@@ -22,7 +22,7 @@
 			font-family: "Solway", Tahoma, sans-serif;
 		}
 		.container {
-			padding-top: 5rem;
+			padding-top: 2.5rem;
 		}
 
 		h1 {
@@ -38,9 +38,10 @@
 				<div class="col-md-12">
 					<h1>My Movie</h1>
 				</div>
-				<div class="col-md-12">
+				<div class="col-md-12  mb-4">
 					<div class="input-group">
 						<input
+                            v-model="keyword"
 							type="text"
 							class="form-control"
 							aria-label="Text input with segmented dropdown button"
@@ -59,11 +60,12 @@
                 </div>
                 
                 <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
+                <div v-for="movie in listMovies.data" class="card" :key="movie.index">
                 <ul class="list-group list-group-flush">
-                    <li v-for="movie in listMovies" class="list-group-item" :key="movie.index">
-                        <h5>title</h5>
-                        <h5>year</h5>
+                    <li class="list-group-item" >
+                        <h5>{{ movie.title }}</h5>
+                        <h5>{{ movie.year }}</h5>
+                        <h5>{{ movie.genre }}</h5>
                     </li>
                     <!-- <li class="list-group-item">Cras justo odio</li> -->
                 </ul>
@@ -88,22 +90,29 @@
 			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
 			crossorigin="anonymous"
 		></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js'></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
 		<script>
 			new Vue({
 				el: "#app",
 				data: {
+                    keyword: '',
                     listMovies: [],
                 },
 				methods: {
 					async searchMovie() {
-						console.log("click!");
-						await fetch("http://localhost/mymovie")
-							.then((response) => response.json())
-							.then(this.addToListMovie);
+                        const url = "http://localhost/mymovie/index.php/home/search_movie/" + this.keyword;
+                        console.log(url);
+                        axios.get(url)
+                            .then(this.addToListMovie)
+                            .catch(function(err) {
+                                console.log(err);
+                            });
 					},
                     addToListMovie(dataFetch) {
                         this.listMovies = dataFetch;
+                        console.log(dataFetch);
+                        
                     }
 				},
 			});

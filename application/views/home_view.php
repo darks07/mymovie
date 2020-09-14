@@ -101,6 +101,7 @@
                 },
 				methods: {
 					async searchMovie() {
+			if (this.keyword === '') return;
                         const url = "http://localhost/mymovie/index.php/home/search_movie/" + this.keyword;
                         console.log(url);
                         axios.get(url)

@@ -24,4 +24,10 @@ class Mod_movie extends CI_Model {
 		return $query->result();
 		
 	}
+	public function detail_movie($movie_id)
+	{
+		$query = $this->db->query("call search_movie('" . $movie_id . "')");
+		return $query->result();
+		
+	}
 }

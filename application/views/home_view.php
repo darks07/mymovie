@@ -63,7 +63,7 @@
                 <div v-for="movie in listMovies.data" class="card" :key="movie.index">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" >
-                        <h5>{{ movie.title }}</h5>
+                        <a href="http://localhost/mymovie/index.php/home/detail_movie/"><h5>{{ movie.title }}</h5></a>
                         <h5>{{ movie.year }}</h5>
                         <h5>{{ movie.genre }}</h5>
                     </li>
